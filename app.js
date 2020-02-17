@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const ejs = require('ejs');
 const mongoose = require('mongoose');
 
 require('dotenv').config();
@@ -32,11 +31,12 @@ app.set('view engine', 'ejs');
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.render('index', {
-    title: 'Home'
-  });
-});
+// Set routes
+const pages = require('./routes/pages');
+const adminPages = require('./routes/admin');
+
+app.use('/', pages);
+app.use('/admin/', adminPages);
 
 //Start the server
 app.listen(PORT, () => {
