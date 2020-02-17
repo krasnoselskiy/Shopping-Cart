@@ -1,0 +1,25 @@
+{
+  "name": "shopping-cart",
+  "version": "1.0.0",
+  "description": "Node.js/Express/Mongoose/MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krasnoselskiy/Shopping-Cart.git"
+  },
+  "author": "Krasnoselskiy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krasnoselskiy/Shopping-Cart/issues"
+  },
+  "homepage": "https://github.com/krasnoselskiy/Shopping-Cart#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.1",
+    "nodemon": "^2.0.2"
+  }
+}
