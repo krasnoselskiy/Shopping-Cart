@@ -1,9 +1,71 @@
 const express = require('express');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
+
+/*
+  Get index
+*/
 
 router.get('/', (req, res) => {
   res.render('admin', {
     title: 'Admin panel'
+  });
+});
+
+/*
+  Get add page
+*/
+
+router.get('/add-page', (req, res) => {
+  let title = 'Add a new page';
+  let slug = '';
+  let content = '';
+
+  res.render('admin/add-page', {
+    title: title,
+    slug: slug,
+    content: content
+  });
+});
+
+/*
+  Post add page
+*/
+
+router.post('/add-page', [
+  check('title').isLength({ min: 5 }),
+  check('content').isLength({ min: 5 })
+], (req, res) => {
+  const errors = validationResult(req)
+
+  const title = req.body.title
+  const content = req.body.content
+  let slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
+  if (slug == "") {
+    slug = title.replace(/\s+/g, '-').toLowerCase();
+  }
+
+  console.log(title, slug, content);
+
+  if (!errors.isEmpty()) {
+    res.render('admin/add-page', {
+      errors: errors,
+      title: title,
+      slug: slug,
+      content: content
+    })
+  } else {
+    console.log('success');
+  }
+});
+
+/*
+  All pages
+*/
+
+router.get('/pages', (req, res) => {
+  res.render('admin/pages', {
+    title: 'All pages'
   });
 });
 

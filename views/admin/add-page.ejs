@@ -1,0 +1,48 @@
+<%- include('../_layouts/admin-head') %>
+<%- include('../_layouts/admin-header') %>
+
+<div class="container mt-5">
+  <%- messages('messages', locals) %>
+
+  <% if (errors) { %>
+    <% errors.forEach(function(error) { %>
+      <div class="err-msg">
+        <%= error.msg %>
+      </div>
+    <% }); %>
+  <% } %>
+
+  <h2 class="page-title">Add a page</h2>
+  <a href="/admin/" class="btn btn-primary">Back to all pages</a>
+
+  <form class="mt-2" method="post" action="/admin/add-page">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Title</label>
+      <input
+        type="text"
+        name="title"
+        class="form-control"
+        placeholder="Page title"
+      />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Slug</label>
+      <input
+        value="<%= slug %>"
+        type="text"
+        name="slug"
+        class="form-control"
+        placeholder="Page slug"
+      />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Content</label>
+      <textarea class="form-control" name="content" placeholder="Page content">
+        <%= content %>
+      </textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Add a page</button>
+  </form>
+</div>
+
+<%- include('../_layouts/admin-footer') %>

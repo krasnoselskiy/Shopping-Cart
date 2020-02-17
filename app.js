@@ -33,8 +33,14 @@ app.set('view engine', 'ejs');
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set global errors variable
+app.locals.errors = null;
+
 // Body parser middleware
-app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 
 // Set session middleware
 app.set('trust proxy', 1);
