@@ -140,4 +140,64 @@ router.get('/pages/edit-page/:slug', (req, res) => {
   });
 });
 
+/*
+  Post edit page
+*/
+
+router.post('/pages/edit-page/:slug', [
+  check('title').isLength({ min: 3 }),
+], (req, res) => {
+  const errorsList = validationResult(req);
+
+  const title = req.body.title;
+  const content = req.body.content;
+  const id = req.body.id;
+  let slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
+
+  if (slug == "") {
+    slug = title.replace(/\s+/g, '-').toLowerCase();
+  }
+
+  if (!errorsList.isEmpty()) {
+    res.render('admin/edit-page', {
+      errors: errorsList.errors,
+      title: title,
+      slug: slug,
+      content: content,
+      id: id
+    });
+  } else {
+    Page.findOne({ slug: slug, _id: { '$ne': id } }, (err, page) => {
+      if (page) {
+        req.flash('danger', 'Page slug exists, please choose another.');
+
+        res.render('admin/edit-page', {
+          title: title,
+          slug: slug,
+          content: content,
+          id: id
+        });
+      } else {
+        Page.findById(id, (err, page) => {
+          if (err) return console.log(err);
+
+          page.title = title;
+          page.content = content;
+          page.slug = slug;
+
+          page.save((err) => {
+            if (err) return console.log(err);
+
+            req.flash('success', 'Page is saved.');
+            res.redirect('/admin/pages/edit-page/' + page.slug);
+          });
+        });
+
+
+      }
+    });
+  }
+});
+
+
 module.exports = router;
