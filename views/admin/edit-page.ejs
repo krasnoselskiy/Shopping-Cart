@@ -17,36 +17,37 @@
 
   <form class="mt-2" method="post" action="/admin/pages/edit-page/<%= slug %>">
     <div class="form-group">
-      <label for="exampleInputEmail1">Title</label>
+      <label for="title">Title</label>
       <input
         value="<%= title %>"
         type="text"
         name="title"
+        id="title"
         class="form-control"
         placeholder="Page title"
       />
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Slug</label>
+      <label for="slug">Slug</label>
       <input
         value="<%= slug %>"
         type="text"
         name="slug"
+        id="slug"
         class="form-control"
         placeholder="Page slug"
       />
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Content</label>
-      <textarea class="form-control" name="content" placeholder="Page content">
-      </textarea>
+      <label for="content">Content</label>
+      <textarea id="content" class="form-control" name="content" placeholder="Page content"><%= content %></textarea>
     </div>
     <input
       value="<%= id %>"
       type="hidden"
       name="id"
     />
-    <button type="submit" class="btn btn-secondary">Add a page</button>
+    <button type="submit" class="btn btn-secondary">Save page</button>
   </form>
 </div>
 

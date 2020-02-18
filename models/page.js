@@ -10,6 +10,10 @@ const PageSchema = new Schema({
     type: String,
     required: true
   },
+  content: {
+    type: String,
+    required: true
+  },
   sorting: {
     type: Number
   }

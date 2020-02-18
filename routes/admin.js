@@ -43,8 +43,8 @@ router.post('/add-page', [
 ], (req, res) => {
   const errorsList = validationResult(req);
 
-  const title = req.body.title
-  const content = req.body.content
+  const title = req.body.title;
+  const content = req.body.content;
   let slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
 
   if (slug == "") {
@@ -60,6 +60,8 @@ router.post('/add-page', [
     });
   } else {
     Page.findOne({ slug: slug }, (err, page) => {
+      console.log(content, "content");
+
       if (page) {
         req.flash('danger', 'Page slug exists, please choose another.');
 
