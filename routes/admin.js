@@ -36,7 +36,7 @@ router.post('/add-page', [
   check('title').isLength({ min: 5 }),
   check('content').isLength({ min: 5 })
 ], (req, res) => {
-  const errors = validationResult(req)
+  const errorsList = validationResult(req);
 
   const title = req.body.title
   const content = req.body.content
@@ -45,17 +45,15 @@ router.post('/add-page', [
     slug = title.replace(/\s+/g, '-').toLowerCase();
   }
 
-  console.log(title, slug, content);
-
-  if (!errors.isEmpty()) {
+  if (!errorsList.isEmpty()) {
     res.render('admin/add-page', {
-      errors: errors,
+      errors: errorsList.errors,
       title: title,
       slug: slug,
       content: content
     })
   } else {
-    console.log('success');
+    res.send("All is okey")
   }
 });
 

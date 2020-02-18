@@ -6,8 +6,8 @@
 
   <% if (errors) { %>
     <% errors.forEach(function(error) { %>
-      <div class="err-msg">
-        <%= error.msg %>
+      <div class="err-msg alert alert-danger">
+        <%= error.param %> has <%= error.msg.toLowerCase(); %>
       </div>
     <% }); %>
   <% } %>
