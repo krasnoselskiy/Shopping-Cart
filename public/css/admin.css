@@ -1,0 +1,19 @@
+.table {
+}
+
+.table tr {
+  cursor: grab;
+}
+
+.table thead th,
+.table tr:nth-of-type(even) {
+  background: #eee;
+}
+
+.table tr:nth-of-type(odd) {
+  background: #ccc;
+}
+
+.ui-state-hightlight {
+  border: 1px dashed #000;
+}

@@ -88,7 +88,7 @@ router.post('/add-page', [
 });
 
 /*
-Post reorder page
+  Post reorder page
 */
 
 router.post('/pages/reorder-page', (req, res) => {
@@ -119,6 +119,23 @@ router.get('/pages', (req, res) => {
     res.render('admin/pages', {
       title: 'All pages',
       pages: pages
+    });
+  });
+});
+
+/*
+  Get edit page
+*/
+
+router.get('/pages/edit-page/:slug', (req, res) => {
+  Page.findOne({ slug: req.params.slug }, (err, page) => {
+    if (err) return console.log(err)
+
+    res.render('admin/edit-page', {
+      title: page.title,
+      slug: page.slug,
+      content: page.content,
+      id: page._id
     });
   });
 });
