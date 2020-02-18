@@ -39,8 +39,6 @@
       var ids = $("tbody").sortable("serialize");
       var url = "/admin/pages/reorder-page";
 
-      console.log(ids, url);
-
       $.post(url, ids);
     }
   });
