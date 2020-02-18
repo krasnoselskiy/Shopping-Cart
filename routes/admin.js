@@ -88,12 +88,34 @@ router.post('/add-page', [
 });
 
 /*
+Post reorder page
+*/
+
+router.post('/pages/reorder-page', (req, res) => {
+  const ids = req.body.id;
+  var count = 0;
+
+  for (let i = 0; i < ids.length; i++) {
+    let id = ids[i];
+    count++;
+
+    (function (count) {
+      Page.findById(id, function (err, page) {
+        page.sorting = count;
+        page.save((err) => {
+          if (err) return console.log(err);
+        });
+      });
+    })(count)
+  }
+});
+
+/*
   All pages
 */
 
 router.get('/pages', (req, res) => {
   Page.find({}).sort({ sorting: 1 }).exec((err, pages) => {
-    console.log(pages);
     res.render('admin/pages', {
       title: 'All pages',
       pages: pages

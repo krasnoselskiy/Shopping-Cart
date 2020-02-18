@@ -15,22 +15,35 @@
       </tr>
     </thead>
 
-    <tbody>
-      <% if (pages) { %>
-        <% pages.forEach(function(page) { %>
-          <tr>
-            <td><%= page.title %></td>
-            <td><a href="/admin/pages/edit-page/<%= page.slug %>">Edit</a></td>
-            <% if (page.slug == "home") { %>
-              <td></td>
-            <% } else { %>
-              <td><a href="/admin/pages/delete-page/<%= page._id %>">Delete</a></td>
-            <% } %>
-          </tr>
-        <% }) %>
-      <% } %>
+    <tbody id="sortable">
+      <% if (pages) { %> <% pages.forEach(function(page) { %>
+      <tr id="id_<%= page._id %>" class="sortable-item <%= page.slug %>">
+        <td><%= page.title %></td>
+        <td><a href="/admin/pages/edit-page/<%= page.slug %>">Edit</a></td>
+        <% if (page.slug == "home") { %>
+        <td></td>
+        <% } else { %>
+        <td><a href="/admin/pages/delete-page/<%= page._id %>">Delete</a></td>
+        <% } %>
+      </tr>
+      <% }) %> <% } %>
     </tbody>
   </table>
 </div>
+
+<script>
+  $("tbody").sortable({
+    items: "tr:not('.home')",
+    placeholder: "ui-state-hightlight",
+    update: function() {
+      var ids = $("tbody").sortable("serialize");
+      var url = "/admin/pages/reorder-page";
+
+      console.log(ids, url);
+
+      $.post(url, ids);
+    }
+  });
+</script>
 
 <%- include('../_layouts/admin-footer') %>
