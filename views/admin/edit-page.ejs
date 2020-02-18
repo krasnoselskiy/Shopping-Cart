@@ -6,14 +6,16 @@
 
   <% if (errors) { %>
     <% errors.forEach(function(error) { %>
-      <div class="err-msg alert alert-danger">
+      <div class="err-msg alert alert-danger mt-5">
         <%= error.param %> has <%= error.msg.toLowerCase(); %>
       </div>
     <% }); %>
   <% } %>
 
-  <h2 class="page-title">Edit a page</h2>
-  <a href="/admin/pages" class="btn btn-secondary">Back to all pages</a>
+  <div class="top_title_wrap">
+    <h2 class="page-title">Edit a page</h2>
+    <a href="/admin/pages" class="btn btn-secondary">Back to all pages</a>
+  </div>
 
   <form class="mt-2" method="post" action="/admin/pages/edit-page/<%= slug %>">
     <div class="form-group">

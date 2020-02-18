@@ -60,8 +60,6 @@ router.post('/add-page', [
     });
   } else {
     Page.findOne({ slug: slug }, (err, page) => {
-      console.log(content, "content");
-
       if (page) {
         req.flash('danger', 'Page slug exists, please choose another.');
 

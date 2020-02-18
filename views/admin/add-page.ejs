@@ -1,19 +1,18 @@
-<%- include('../_layouts/admin-head') %>
-<%- include('../_layouts/admin-header') %>
+<%- include('../_layouts/admin-head') %> <%- include('../_layouts/admin-header')
+%>
 
 <div class="container mt-5">
-  <%- messages('messages', locals) %>
+  <%- messages('messages', locals) %> <% if (errors) { %> <%
+  errors.forEach(function(error) { %>
+  <div class="err-msg alert alert-danger mt-5">
+    <%= error.param %> has <%= error.msg.toLowerCase(); %>
+  </div>
+  <% }); %> <% } %>
 
-  <% if (errors) { %>
-    <% errors.forEach(function(error) { %>
-      <div class="err-msg alert alert-danger">
-        <%= error.param %> has <%= error.msg.toLowerCase(); %>
-      </div>
-    <% }); %>
-  <% } %>
-
-  <h2 class="page-title">Add a page</h2>
-  <a href="/admin/pages" class="btn btn-secondary">Back to all pages</a>
+  <div class="top_title_wrap">
+    <h2 class="page-title">Add a page</h2>
+    <a href="/admin/pages" class="btn btn-secondary">Back to all pages</a>
+  </div>
 
   <form class="mt-2" method="post" action="/admin/add-page">
     <div class="form-group">
@@ -37,7 +36,11 @@
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Content</label>
-      <textarea class="form-control" name="content" placeholder="Page content"></textarea>
+      <textarea
+        class="form-control"
+        name="content"
+        placeholder="Page content"
+      ></textarea>
     </div>
     <button type="submit" class="btn btn-secondary">Add a page</button>
   </form>

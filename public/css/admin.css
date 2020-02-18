@@ -17,3 +17,13 @@
 .ui-state-hightlight {
   border: 1px dashed #000;
 }
+
+.top_title_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn.btn-secondary {
+  line-height: 1.8;
+  height: 45px;
+}
