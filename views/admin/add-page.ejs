@@ -13,7 +13,7 @@
   <% } %>
 
   <h2 class="page-title">Add a page</h2>
-  <a href="/admin/" class="btn btn-primary">Back to all pages</a>
+  <a href="/admin/" class="btn btn-secondary">Back to all pages</a>
 
   <form class="mt-2" method="post" action="/admin/add-page">
     <div class="form-group">
@@ -38,10 +38,9 @@
     <div class="form-group">
       <label for="exampleInputPassword1">Content</label>
       <textarea class="form-control" name="content" placeholder="Page content">
-        <%= content %>
       </textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Add a page</button>
+    <button type="submit" class="btn btn-secondary">Add a page</button>
   </form>
 </div>
 

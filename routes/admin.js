@@ -3,12 +3,18 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 /*
+  Get pages models
+*/
+
+const Page = require('../models/page');
+
+/*
   Get index
 */
 
 router.get('/', (req, res) => {
   res.render('admin', {
-    title: 'Admin panel'
+    title: 'Admin panel',
   });
 });
 
@@ -33,14 +39,14 @@ router.get('/add-page', (req, res) => {
 */
 
 router.post('/add-page', [
-  check('title').isLength({ min: 5 }),
-  check('content').isLength({ min: 5 })
+  check('title').isLength({ min: 3 }),
 ], (req, res) => {
   const errorsList = validationResult(req);
 
   const title = req.body.title
   const content = req.body.content
   let slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
+
   if (slug == "") {
     slug = title.replace(/\s+/g, '-').toLowerCase();
   }
@@ -51,9 +57,33 @@ router.post('/add-page', [
       title: title,
       slug: slug,
       content: content
-    })
+    });
   } else {
-    res.send("All is okey")
+    Page.findOne({ slug: slug }, (err, page) => {
+      if (page) {
+        req.flash('danger', 'Page slug exists, please choose another.');
+
+        res.render('admin/add-page', {
+          title: title,
+          slug: slug,
+          content: content
+        });
+      } else {
+        const page = new Page({
+          title: title,
+          slug: slug,
+          content: content,
+          sorting: 100
+        });
+
+        page.save((err) => {
+          if (err) return console.log(err);
+
+          req.flash('success', 'Page is added.');
+          res.redirect('/admin/pages');
+        });
+      }
+    });
   }
 });
 
@@ -62,8 +92,12 @@ router.post('/add-page', [
 */
 
 router.get('/pages', (req, res) => {
-  res.render('admin/pages', {
-    title: 'All pages'
+  Page.find({}).sort({ sorting: 1 }).exec((err, pages) => {
+    console.log(pages);
+    res.render('admin/pages', {
+      title: 'All pages',
+      pages: pages
+    });
   });
 });
 
