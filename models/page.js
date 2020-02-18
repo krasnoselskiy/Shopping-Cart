@@ -19,4 +19,6 @@ const PageSchema = new Schema({
   }
 });
 
+mongoose.set('useFindAndModify', false);
+
 const Page = module.exports = mongoose.model('Page', PageSchema)

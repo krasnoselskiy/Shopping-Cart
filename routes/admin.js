@@ -188,7 +188,7 @@ router.post('/pages/edit-page/:slug', [
           page.save((err) => {
             if (err) return console.log(err);
 
-            req.flash('success', 'Page is saved.');
+            req.flash('success', 'Page is saved');
             res.redirect('/admin/pages/edit-page/' + page.slug);
           });
         });
@@ -197,6 +197,20 @@ router.post('/pages/edit-page/:slug', [
       }
     });
   }
+});
+
+
+/*
+  Get delete page
+*/
+
+router.get('/pages/delete-page/:slug', (req, res) => {
+  Page.findByIdAndRemove(req.params.slug, (err) => {
+    if (err) return console.log(err);
+
+    req.flash('success', 'Page is deleted');
+    res.redirect('/admin/pages');
+  });
 });
 
 
