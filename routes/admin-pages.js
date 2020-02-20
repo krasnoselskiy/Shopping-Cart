@@ -192,13 +192,10 @@ router.post('/pages/edit-page/:slug', [
             res.redirect('/admin/pages/edit-page/' + page.slug);
           });
         });
-
-
       }
     });
   }
 });
-
 
 /*
   Get delete page

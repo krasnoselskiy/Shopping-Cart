@@ -1,0 +1,32 @@
+<%- include('../_layouts/admin-head') %> <%- include('../_layouts/admin-header')
+%>
+
+<div class="container mt-5">
+  <div class="top_title_wrap">
+    <h2 class="page-title">Categories</h2>
+    <a href="/admin/categories/add-category" class="btn btn-secondary">Add new category</a>
+  </div>
+
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+
+    <tbody id="sortable">
+      <% if (categories) { %> <% categories.forEach(function(category) { %>
+        <tr id="id_<%= category._id %>" class="sortable-item <%= category.slug %>">
+          <td><%= category.title %></td>
+          <td><a href="/admin/categories/edit-category/<%= category.slug %>">Edit</a></td>
+          <td><a class="confirmDeletion" href="/admin/categories/delete-category/<%= category._id %>">Delete</a></td>
+          <% }) %>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../_layouts/admin-footer') %>

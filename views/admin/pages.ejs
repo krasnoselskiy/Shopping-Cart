@@ -32,17 +32,4 @@
   </table>
 </div>
 
-<script>
-  $("tbody").sortable({
-    items: "tr:not('.home')",
-    placeholder: "ui-state-hightlight",
-    update: function() {
-      var ids = $("tbody").sortable("serialize");
-      var url = "/admin/pages/reorder-page";
-
-      $.post(url, ids);
-    }
-  });
-</script>
-
 <%- include('../_layouts/admin-footer') %>

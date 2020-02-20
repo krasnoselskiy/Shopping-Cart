@@ -60,10 +60,12 @@ app.use(function (req, res, next) {
 
 // Set routes
 const pages = require('./routes/pages');
-const adminPages = require('./routes/admin');
+const adminPages = require('./routes/admin-pages');
+const adminCategories = require('./routes/admin-categories');
 
 app.use('/', pages);
 app.use('/admin/', adminPages);
+app.use('/admin/categories/', adminCategories);
 
 //Start the server
 app.listen(PORT, () => {

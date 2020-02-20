@@ -13,4 +13,17 @@ $(document).ready(function () {
       if (!confirm('Confirm deletion')) return false;
     })
   }
+
+  if ($(".table").length) {
+    $("tbody").sortable({
+      items: "tr:not('.home')",
+      placeholder: "ui-state-hightlight",
+      update: function () {
+        var ids = $("tbody").sortable("serialize");
+        var url = "/admin/pages/reorder-page";
+
+        $.post(url, ids);
+      }
+    });
+  }
 });
